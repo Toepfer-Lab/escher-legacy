@@ -24,16 +24,17 @@ jobs:
         run: npm run build
       - name: Copy Package to py directory
         run: npm run copy
-      - name: Change dir
-        run: cd py
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
+        working-directory: py
         run: python -m pip install tox
       - name: Run tests
+        working-directory: py
         run: tox -e py
+
 
   build-publish:
     needs: [test]
@@ -50,8 +51,6 @@ jobs:
       run: npm run build
     - name: Copy Package to py directory
       run: npm run copy
-    - name: Change dir
-      run: cd py
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
@@ -62,10 +61,13 @@ jobs:
         python -m pip install --upgrade pip setuptools wheel
         python -m pip install twine
     - name: Build package
+      working-directory: py
       run: python setup.py sdist bdist_wheel
     - name: Check the package
+      working-directory: py
       run: twine check dist/*
     - name: Publish to PyPI
+      working-directory: py
       env:
         TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
         TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
