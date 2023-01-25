@@ -8,16 +8,6 @@ on:
       - master
 
 jobs:
-  build-js:
-    name: Build the JavaScript package
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/cache@v2
-        env:
-          cache-name: js-package
-        with:
-          path:
   test:
     strategy:
       matrix:
