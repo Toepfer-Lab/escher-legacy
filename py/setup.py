@@ -10,12 +10,17 @@ full_version = __import__('version').__full_version__
 package = __import__('version').package
 port = 8789
 
+with open(file="README.md", mode="r") as f:
+    readme = "".join(f.readlines())
+
 setup(
     name='Escher-legacy',
     version=full_version,
     author=package['author'],
     url=package['homepage'],
     description=package['description'],
+    long_description=readme,
+    long_description_content_type= "text/markdown",
     keywords=', '.join(package['keywords']),
     license=package['license'],
     classifiers=[
