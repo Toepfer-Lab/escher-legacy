@@ -23,10 +23,12 @@ _escher_web = {
                                          __map_model_version__),
 }
 
+# NOTE: the last js were for version 1.7.3
+VERSION = "1.7.3"
 _dependencies_cdn = {
-    'escher': 'https://unpkg.com/escher@%s/dist/escher.js' % __version__,
+    'escher': 'https://unpkg.com/escher@%s/dist/escher.js' % VERSION,
     'escher_min': ('https://unpkg.com/escher@%s/dist/escher.min.js' %
-                   __version__),
+                   VERSION),
 }
 
 _links = {
